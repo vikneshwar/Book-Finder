@@ -18,7 +18,7 @@ const selectBookContainerDomain = state => state.bookContainer || initialState;
 const makeSelectBookContainer = () =>
   createSelector(
     selectBookContainerDomain,
-    substate => substate,
+    substate => substate.books,
   );
 
 export default makeSelectBookContainer;
