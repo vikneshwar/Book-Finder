@@ -11,13 +11,17 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
+
 import makeSelectSearchContainer from './selectors';
 import reducer from './reducer';
 import SearchField from '../../components/SearchField';
 import { searchAction } from './actions';
+import saga from './saga';
 
 export function SearchContainer({ handleSearch }) {
   useInjectReducer({ key: 'searchContainer', reducer });
+  useInjectSaga({ key: 'searchContainer', saga });
 
   return <SearchField onSearch={handleSearch} />;
 }

@@ -19,7 +19,7 @@ const selectSearchContainerDomain = state =>
 const makeSelectSearchContainer = () =>
   createSelector(
     selectSearchContainerDomain,
-    substate => substate,
+    substate => substate.searchText,
   );
 
 export default makeSelectSearchContainer;

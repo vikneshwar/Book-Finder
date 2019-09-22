@@ -14,6 +14,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     marginTop: '64px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   searcRoot: {
     display: 'flex',
@@ -25,6 +28,8 @@ const useStyles = makeStyles(theme => ({
   bookRoot: {
     marginLeft: '30px',
     marginRight: '30px',
+    display: 'flex',
+    justifyContent: 'center',
   },
 }));
 export default function HomePage() {

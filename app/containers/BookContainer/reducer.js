@@ -5,8 +5,9 @@
  */
 import produce from 'immer';
 import { DEFAULT_ACTION } from './constants';
+import { SET_BOOKS_ACTION } from '../SearchContainer/constants';
 
-export const initialState = {
+export const initialStatex = {
          books: [
            {
              kind: 'books#volume',
@@ -865,11 +866,15 @@ export const initialState = {
          ],
        };
 
+export const initialState = { books: [] }
 /* eslint-disable default-case, no-param-reassign */
 const bookContainerReducer = (state = initialState, action) =>
-  produce(state, (/* draft */) => {
+  produce(state, draft => {
     switch (action.type) {
       case DEFAULT_ACTION:
+        break;
+      case SET_BOOKS_ACTION:
+        draft.books = action.payload
         break;
     }
   });

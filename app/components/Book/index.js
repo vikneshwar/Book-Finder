@@ -81,6 +81,7 @@ function Book({ book }) {
     imageLinks: { thumbnail },
     authors,
     publisher,
+    previewLink,
   } = volumeInfo;
 
   return (
@@ -105,16 +106,17 @@ function Book({ book }) {
             <Grid item xs={8}>
               <div className={classes.detail}>
                 <CardContent className={classes.bookInfo}>
-                  <h3 className={classes.bookTitle}>{title}</h3>
-                  <p className={classes.author}>
-                    Author:{' '}
-                    {authors.map((author, index) => (
-                      <span>
-                        {author}
-                        {index !== authors.length - 1 ? ', ' : ''}
-                      </span>
-                    ))}
-                  </p>
+                  <h3 className={classes.bookTitle}>
+                    {title.length > 100
+                      ? `${title.slice(0, 80)}.......`
+                      : title}{' '}
+                  </h3>
+                  {authors && (
+                    <p className={classes.author}>
+                      <span>Authors: </span>
+                      {authors.join(', ')}
+                    </p>
+                  )}
                   <p
                     className={classes.publisher}
                   >{`Published By: ${publisher || 'Unknown'}`}</p>
@@ -122,7 +124,8 @@ function Book({ book }) {
                 <CardActions className={classes.buttonAction}>
                   <Button
                     variant="contained"
-                    color="primary"
+                    href={previewLink}
+                    target="blank"
                     className={classes.bookLink}
                   >
                     See this book
