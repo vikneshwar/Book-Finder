@@ -20,6 +20,7 @@ import { Grid } from '@material-ui/core';
 import Loading from '../../components/Loading';
 import { Waypoint } from 'react-waypoint';
 import { searchAction } from '../SearchContainer/actions';
+import { fetchMoreBooksAction } from './actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,7 +68,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchMoreBooks: searchText => dispatch(searchAction(searchText)),
+    fetchMoreBooks: () => dispatch(fetchMoreBooksAction()),
   };
 }
 
