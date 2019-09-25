@@ -85,58 +85,53 @@ function Book({ book }) {
   } = volumeInfo;
 
   return (
-    <Grid item xs={12} md={6} className={classes.cardGrid}>
-      <Box boxShadow={20}>
-        <Card className={classes.card}>
-          <Grid container spacing={2}>
-            <Grid item xs={4} className={classes.imageGrid}>
-              <div className={classes.bookImageSec}>
-                <Box boxShadow={10}>
-                  <CardMedia
-                    className={classes.bookImage}
-                    component="img"
-                    alt={title}
-                    title={title}
-                    image={thumbnail}
-                    height="200"
-                  />
-                </Box>
-              </div>
-            </Grid>
-            <Grid item xs={8}>
-              <div className={classes.detail}>
-                <CardContent className={classes.bookInfo}>
-                  <h3 className={classes.bookTitle}>
-                    {title.length > 100
-                      ? `${title.slice(0, 80)}.......`
-                      : title}{' '}
-                  </h3>
-                  {authors && (
-                    <p className={classes.author}>
-                      <span>Authors: </span>
-                      {authors.join(', ')}
-                    </p>
-                  )}
-                  <p
-                    className={classes.publisher}
-                  >{`Published By: ${publisher || 'Unknown'}`}</p>
-                </CardContent>
-                <CardActions className={classes.buttonAction}>
-                  <Button
-                    variant="contained"
-                    href={previewLink}
-                    target="blank"
-                    className={classes.bookLink}
-                  >
-                    See this book
-                  </Button>
-                </CardActions>
-              </div>
-            </Grid>
+    <Box boxShadow={20}>
+      <Card className={classes.card}>
+        <Grid container spacing={2}>
+          <Grid item xs={4} className={classes.imageGrid}>
+            <div className={classes.bookImageSec}>
+              <Box boxShadow={10}>
+                <CardMedia
+                  className={classes.bookImage}
+                  component="img"
+                  alt={title}
+                  title={title}
+                  image={thumbnail}
+                  height="200"
+                />
+              </Box>
+            </div>
           </Grid>
-        </Card>
-      </Box>
-    </Grid>
+          <Grid item xs={8}>
+            <div className={classes.detail}>
+              <CardContent className={classes.bookInfo}>
+                <h3 className={classes.bookTitle}>
+                  {title.length > 100 ? `${title.slice(0, 80)}.......` : title}{' '}
+                </h3>
+                {authors && (
+                  <p className={classes.author}>
+                    <span>Authors: </span>
+                    {authors.join(', ')}
+                  </p>
+                )}
+                <p className={classes.publisher}>{`Published By: ${publisher ||
+                  'Unknown'}`}</p>
+              </CardContent>
+              <CardActions className={classes.buttonAction}>
+                <Button
+                  variant="contained"
+                  href={previewLink}
+                  target="blank"
+                  className={classes.bookLink}
+                >
+                  See this book
+                </Button>
+              </CardActions>
+            </div>
+          </Grid>
+        </Grid>
+      </Card>
+    </Box>
   );
 }
 

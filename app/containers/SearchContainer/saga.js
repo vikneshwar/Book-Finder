@@ -10,7 +10,8 @@ import { setBooksAction, setIsLoadingAction } from './actions';
 // Individual exports for testing
 export function* getBooks() {
   const payload = yield select(makeSelectSearchContainer());
-  if (payload === '') return yield put(setBooksAction([]));
+  if (payload === '')
+    return yield put(setBooksAction({ totalItems: 0, items: [] }));
   const queryString = getQueryFromObj({
     key: GOOGLE_BOOKS_KEY,
     q: payload,
@@ -21,13 +22,12 @@ export function* getBooks() {
   try {
     // Call our request helper (see 'utils/request')
     const bookResponse = yield call(request, requestURL, {});
-    yield put(setBooksAction(bookResponse.items));
-    yield put(setIsLoadingAction(false));
+    yield put(setBooksAction(bookResponse));
+    // yield put(setIsLoadingAction(false));
   } catch (err) {
     // yield put(errorAction(err.response));
   }
 }
 export default function* searchContainerSaga() {
-  // See example in containers/HomePage/saga.js
   yield takeLatest(SEARCH_ACTION, getBooks);
 }

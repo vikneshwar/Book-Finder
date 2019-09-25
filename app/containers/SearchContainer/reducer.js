@@ -8,6 +8,7 @@ import {
   DEFAULT_ACTION,
   SEARCH_ACTION,
   SET_IS_LOADING_ACTION,
+  SET_BOOKS_ACTION,
 } from './constants';
 
 export const initialState = {
@@ -23,8 +24,8 @@ const searchContainerReducer = (state = initialState, action) =>
         draft.searchText = action.payload;
         draft.isLoading = !!action.payload;
         break;
-      case SET_IS_LOADING_ACTION:
-        draft.isLoading = action.payload;
+      case SET_BOOKS_ACTION:
+        draft.isLoading = false;
         break;
     }
   });

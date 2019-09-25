@@ -11,7 +11,13 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { selectBooks, selectisLoading } from './selectors';
+import {
+  selectBooks,
+  selectisLoading,
+  isMoreBooksAvailable,
+  shouldFetchMoreBooks,
+  selectIsLoadingMoreBooks,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import Book from '../../components/Book';
@@ -33,25 +39,37 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     alignContent: 'center',
   },
+  cardGrid: {
+    maxWidth: '600px',
+  },
 }));
-function BookContainer({ books, isLoading }) {
+function BookContainer({
+  books,
+  isLoading,
+  shouldRenderWaypoint,
+  fetchMoreBooks,
+  isMoreBooksLoading,
+}) {
   const classes = useStyles();
 
   useInjectReducer({ key: 'bookContainer', reducer });
   useInjectSaga({ key: 'bookContainer', saga });
 
-  const fetchMoreBooks = () => {};
+  // const fetchMoreBooks = () => {};
   if (isLoading) {
     return <Loading />;
   }
   return (
     <Grid container spacing={3} className={classes.bookGrid}>
       {books.map((book, index) => (
-        <>
-          <Book book={book} key={book.id} />
-          {index === books.length - 5 && <Waypoint onEnter={fetchMoreBooks} />}
-        </>
+        <Grid item key={book.etag} xs={12} md={6} className={classes.cardGrid}>
+          <Book book={book} />
+        </Grid>
       ))}
+      {shouldRenderWaypoint && (
+        <Waypoint threshold={2.0} onEnter={() => fetchMoreBooks()} />
+      )}
+      {isMoreBooksLoading && <Loading />}
     </Grid>
   );
 }
@@ -59,16 +77,24 @@ function BookContainer({ books, isLoading }) {
 BookContainer.propTypes = {
   books: PropTypes.array,
   isLoading: PropTypes.bool,
+  fetchMoreBooks: PropTypes.func,
+  isMoreBooksLoading: PropTypes.bool,
+  shouldRenderWaypoint: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
   isLoading: selectisLoading(state),
   books: selectBooks(state),
+  shouldRenderWaypoint: shouldFetchMoreBooks(state),
+  isMoreBooksLoading: selectIsLoadingMoreBooks(state),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchMoreBooks: () => dispatch(fetchMoreBooksAction()),
+    fetchMoreBooks: () => {
+      console.log('fetching more books');
+      dispatch(fetchMoreBooksAction());
+    },
   };
 }
 

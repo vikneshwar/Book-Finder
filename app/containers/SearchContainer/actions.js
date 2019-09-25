@@ -17,10 +17,10 @@ export function searchAction(searchText) {
   };
 }
 
-export function setBooksAction(volumeItem) {
+export function setBooksAction(bookResponse) {
   return {
     type: SET_BOOKS_ACTION,
-    payload: volumeItem,
+    payload: bookResponse,
   };
 }
 

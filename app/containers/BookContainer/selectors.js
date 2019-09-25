@@ -15,6 +15,16 @@ const selectSearchContainerDomain = state =>
 
 const selectBooks = state => selectBookContainerDomain(state).books;
 const selectisLoading = state => selectSearchContainerDomain(state).isLoading;
+const shouldFetchMoreBooks = state => {
+  const totalBooksFetched = selectBooks(state);
+  const totalBooksinGoogle = selectTotalBooks(state);
+  const isLoadingMoreBooks = selectIsLoadingMoreBooks(state);
+  return totalBooksinGoogle > totalBooksFetched.length && !isLoadingMoreBooks;
+};
+
+const selectTotalBooks = state => selectBookContainerDomain(state).totalBooks;
+const selectIsLoadingMoreBooks = state =>
+  selectBookContainerDomain(state).isLoadingMoreBooks;
 /**
  * Default selector used by BookContainer
  */
@@ -26,4 +36,10 @@ const makeSelectBookContainer = () =>
   );
 
 export default makeSelectBookContainer;
-export { selectisLoading, selectBooks };
+export {
+  selectisLoading,
+  selectBooks,
+  shouldFetchMoreBooks,
+  selectTotalBooks,
+  selectIsLoadingMoreBooks,
+};

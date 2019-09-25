@@ -4,7 +4,7 @@
  *
  */
 import produce from 'immer';
-import { DEFAULT_ACTION } from './constants';
+import { DEFAULT_ACTION, FETCH_MORE_BOOKS_ACTION } from './constants';
 import { SET_BOOKS_ACTION } from '../SearchContainer/constants';
 
 export const initialStatex = {
@@ -866,15 +866,23 @@ export const initialStatex = {
          ],
        };
 
-export const initialState = { books: [] }
+export const initialState = { books: [], totalBooks: 0, isLoadingMoreBooks: false};
 /* eslint-disable default-case, no-param-reassign */
 const bookContainerReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case DEFAULT_ACTION:
         break;
+      case FETCH_MORE_BOOKS_ACTION: 
+        draft.isLoadingMoreBooks = true;
+        break;
       case SET_BOOKS_ACTION:
-        draft.books = action.payload
+        draft.books = [
+          ...state.books,
+          ...action.payload.items
+        ];
+        draft.totalBooks = action.payload.totalItems;
+        draft.isLoadingMoreBooks = false;
         break;
     }
   });
