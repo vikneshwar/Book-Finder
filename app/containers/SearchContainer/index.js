@@ -30,16 +30,17 @@ SearchContainer.propTypes = {
   handleSearch: PropTypes.func,
 };
 
-const mapStateToProps = createStructuredSelector({
-  searchContainer: makeSelectSearchContainer(),
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = dispatch => ({
+  handleSearch: searchText => dispatch(searchAction(searchText)),
 });
 
-function mapDispatchToProps(dispatch) {
+/* const mapDispatchToProps = function(dispatch) {
   return {
     handleSearch: searchText => dispatch(searchAction(searchText)),
   };
-}
-
+}; */
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,

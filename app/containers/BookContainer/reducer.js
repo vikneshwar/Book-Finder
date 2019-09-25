@@ -5,7 +5,7 @@
  */
 import produce from 'immer';
 import { DEFAULT_ACTION, FETCH_MORE_BOOKS_ACTION } from './constants';
-import { SET_BOOKS_ACTION } from '../SearchContainer/constants';
+import { SET_BOOKS_ACTION, SET_EMPTY_ACTION } from '../SearchContainer/constants';
 
 export const initialStatex = {
          books: [
@@ -875,6 +875,11 @@ const bookContainerReducer = (state = initialState, action) =>
         break;
       case FETCH_MORE_BOOKS_ACTION: 
         draft.isLoadingMoreBooks = true;
+        break;
+      case SET_EMPTY_ACTION: 
+        draft.books = []
+        draft.totalBooks = 0
+        draft.isLoadingMoreBooks = false
         break;
       case SET_BOOKS_ACTION:
         draft.books = [

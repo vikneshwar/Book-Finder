@@ -14,7 +14,6 @@ import { useInjectReducer } from 'utils/injectReducer';
 import {
   selectBooks,
   selectisLoading,
-  isMoreBooksAvailable,
   shouldFetchMoreBooks,
   selectIsLoadingMoreBooks,
 } from './selectors';
@@ -25,7 +24,6 @@ import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import Loading from '../../components/Loading';
 import { Waypoint } from 'react-waypoint';
-import { searchAction } from '../SearchContainer/actions';
 import { fetchMoreBooksAction } from './actions';
 
 const useStyles = makeStyles(theme => ({
@@ -91,10 +89,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchMoreBooks: () => {
-      console.log('fetching more books');
-      dispatch(fetchMoreBooksAction());
-    },
+    fetchMoreBooks: () => dispatch(fetchMoreBooksAction()),
   };
 }
 

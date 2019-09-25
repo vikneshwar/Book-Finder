@@ -16,9 +16,6 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-
 const useStyles = makeStyles(theme => ({
   root: {
     padding: '2px 4px',

@@ -7,8 +7,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { CircularProgress } from '@material-ui/core';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 
 const useStyles = makeStyles(theme => ({
   progressRoot: {

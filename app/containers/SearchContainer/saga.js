@@ -5,13 +5,12 @@ import { SEARCH_ACTION } from './constants';
 import { getQueryFromObj } from '../../utils/urlHelper';
 import { GOOGLE_BOOKS_KEY, GOOGLE_BOOK_URL } from '../../utils/constants';
 import request from '../../utils/request';
-import { setBooksAction, setIsLoadingAction } from './actions';
+import { setBooksAction, setIsLoadingAction, setEmptyAction } from './actions';
 
 // Individual exports for testing
 export function* getBooks() {
   const payload = yield select(makeSelectSearchContainer());
-  if (payload === '')
-    return yield put(setBooksAction({ totalItems: 0, items: [] }));
+  if (payload === '') return yield put(setEmptyAction());
   const queryString = getQueryFromObj({
     key: GOOGLE_BOOKS_KEY,
     q: payload,
@@ -20,7 +19,6 @@ export function* getBooks() {
   const requestURL = GOOGLE_BOOK_URL + queryString;
 
   try {
-    // Call our request helper (see 'utils/request')
     const bookResponse = yield call(request, requestURL, {});
     yield put(setBooksAction(bookResponse));
     // yield put(setIsLoadingAction(false));

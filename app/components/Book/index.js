@@ -17,10 +17,9 @@ import {
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/styles';
-import { grey } from '@material-ui/core/colors';
+import defaultCover from '../../images/book-cover-placeholder.jpg';
 
 // import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -76,14 +75,7 @@ const useStyles = makeStyles(theme => ({
 function Book({ book }) {
   const classes = useStyles();
   const { volumeInfo } = book;
-  const {
-    title,
-    imageLinks: { thumbnail },
-    authors,
-    publisher,
-    previewLink,
-  } = volumeInfo;
-
+  const { title, authors, publisher, previewLink, imageLinks } = volumeInfo;
   return (
     <Box boxShadow={20}>
       <Card className={classes.card}>
@@ -96,7 +88,7 @@ function Book({ book }) {
                   component="img"
                   alt={title}
                   title={title}
-                  image={thumbnail}
+                  image={imageLinks ? imageLinks.thumbnail : defaultCover}
                   height="200"
                 />
               </Box>

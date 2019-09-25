@@ -32,7 +32,6 @@ export function* fetchMoreBooks() {
   console.log('calling google maps');
 
   try {
-    // Call our request helper (see 'utils/request')
     const bookResponse = yield call(request, requestURL, {});
     yield put(setBooksAction(bookResponse));
   } catch (err) {

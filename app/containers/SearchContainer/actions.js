@@ -8,6 +8,7 @@ import {
   SEARCH_ACTION,
   SET_BOOKS_ACTION,
   SET_IS_LOADING_ACTION,
+  SET_EMPTY_ACTION,
 } from './constants';
 
 export function searchAction(searchText) {
@@ -21,6 +22,12 @@ export function setBooksAction(bookResponse) {
   return {
     type: SET_BOOKS_ACTION,
     payload: bookResponse,
+  };
+}
+
+export function setEmptyAction() {
+  return {
+    type: SET_EMPTY_ACTION,
   };
 }
 
