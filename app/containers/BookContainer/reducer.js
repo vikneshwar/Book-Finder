@@ -4,8 +4,12 @@
  *
  */
 import produce from 'immer';
-import { DEFAULT_ACTION, FETCH_MORE_BOOKS_ACTION } from './constants';
-import { SET_BOOKS_ACTION, SET_EMPTY_ACTION } from '../SearchContainer/constants';
+import {
+  DEFAULT_ACTION,
+  FETCH_MORE_BOOKS_ACTION,
+  ADD_MORE_BOOKS_ACTION,
+} from './constants';
+import { SET_BOOKS_ACTION } from '../SearchContainer/constants';
 
 export const initialStatex = {
          books: [
@@ -873,19 +877,16 @@ const bookContainerReducer = (state = initialState, action) =>
     switch (action.type) {
       case DEFAULT_ACTION:
         break;
-      case FETCH_MORE_BOOKS_ACTION: 
+      case FETCH_MORE_BOOKS_ACTION:
         draft.isLoadingMoreBooks = true;
         break;
-      case SET_EMPTY_ACTION: 
-        draft.books = []
-        draft.totalBooks = 0
-        draft.isLoadingMoreBooks = false
-        break;
       case SET_BOOKS_ACTION:
-        draft.books = [
-          ...state.books,
-          ...action.payload.items
-        ];
+        draft.books = action.payload.items;
+        draft.totalBooks = action.payload.totalItems;
+        draft.isLoadingMoreBooks = false;
+        break;
+      case ADD_MORE_BOOKS_ACTION:
+        draft.books = [...state.books, ...action.payload.items];
         draft.totalBooks = action.payload.totalItems;
         draft.isLoadingMoreBooks = false;
         break;

@@ -10,7 +10,8 @@ import { setBooksAction, setIsLoadingAction, setEmptyAction } from './actions';
 // Individual exports for testing
 export function* getBooks() {
   const payload = yield select(makeSelectSearchContainer());
-  if (payload === '') return yield put(setEmptyAction());
+  if (payload === '')
+    return yield put(setBooksAction({ totalItems: 0, items: [] }));
   const queryString = getQueryFromObj({
     key: GOOGLE_BOOKS_KEY,
     q: payload,

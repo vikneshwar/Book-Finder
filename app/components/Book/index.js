@@ -33,21 +33,33 @@ const useStyles = makeStyles(theme => ({
   bookInfo: {
     display: 'flex',
     flexDirection: 'column',
+    padding: '5px',
   },
   bookImageSec: {
-    paddingLeft: '10px',
+    // paddingLeft: '10px',
     paddingRight: '10px',
+    height: '100%',
     /* maxWidth: '134px',
     maxHeight: '200px', */
   },
+  imageBox: {
+    height: '100%',
+  },
+  bookImage: {
+    height: '100%',
+  },
   bookTitle: {
     fontSize: '20px',
+    margin: '10px',
+    marginLeft: '0px',
   },
   author: {
     fontSize: '16px',
+    margin: '5px 0px 5px 0px',
   },
   publisher: {
     fontSize: '16px',
+    margin: '5px 0px 5px 0px',
   },
   bookLink: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -59,16 +71,13 @@ const useStyles = makeStyles(theme => ({
     padding: '0 30px',
   },
   buttonAction: {
-    marginBottom: '20px',
+    // marginBottom: '20px',
   },
   imageGrid: {
-    maxWidth: '150px',
+    maxWidth: '170px',
   },
   cardGrid: {
     maxWidth: '600px',
-  },
-  bookImage: {
-    // boxShadow: '9px 7px 10px 0px rgba(117,117,117,0.82)',
   },
 }));
 
@@ -82,7 +91,7 @@ function Book({ book }) {
         <Grid container spacing={2}>
           <Grid item xs={4} className={classes.imageGrid}>
             <div className={classes.bookImageSec}>
-              <Box boxShadow={10}>
+              <Box boxShadow={10} className={classes.imageBox}>
                 <CardMedia
                   className={classes.bookImage}
                   component="img"

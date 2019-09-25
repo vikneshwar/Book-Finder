@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
   cardGrid: {
     maxWidth: '600px',
+    // maxHeight: '260px',
   },
 }));
 function BookContainer({

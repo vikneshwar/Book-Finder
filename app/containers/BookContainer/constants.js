@@ -10,3 +10,5 @@ export const FETCH_MORE_BOOKS_ACTION =
 
 export const IS_LOADING_MORE_BOOKS_ACTION =
   'app/BookContainer/IS_LOADING_MORE_BOOKS_ACTION';
+
+export const ADD_MORE_BOOKS_ACTION = 'app/BookContainer/ADD_MORE_BOOKS_ACTION';

@@ -6,6 +6,7 @@ import { GOOGLE_BOOKS_KEY, GOOGLE_BOOK_URL } from '../../utils/constants';
 import { getQueryFromObj } from '../../utils/urlHelper';
 import request from '../../utils/request';
 import { setBooksAction } from '../SearchContainer/actions';
+import { addMoreBooksAction } from './actions';
 
 // import { take, call, put, select } from 'redux-saga/effects';
 
@@ -33,7 +34,7 @@ export function* fetchMoreBooks() {
 
   try {
     const bookResponse = yield call(request, requestURL, {});
-    yield put(setBooksAction(bookResponse));
+    yield put(addMoreBooksAction(bookResponse));
   } catch (err) {
     // yield put(errorAction(err.response));
   }
